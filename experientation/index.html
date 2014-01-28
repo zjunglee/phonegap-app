@@ -1,0 +1,125 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WEB STORAGE SAMPLE</title>
+    <script>
+        function addStorage() {
+            var key = document.getElementById('storageKey');
+            var data = document.getElementById('storageData');
+
+            //localStorage setItem
+            if ("localStorage" in window) {
+                localStorage.setItem(key.value, data.value);
+                location.reload();
+            } else {
+                alert("no localStorage in window");
+            }
+
+            //sessionStorage setItem
+            if ("sessionStorage" in window) {
+                sessionStorage.setItem(key.value, data.value);
+                location.reload();
+            } else {
+                alert("no sessionStorage in window");
+            }
+        }
+
+        function removeStorage() {
+            var key = document.getElementById('removeKey');
+
+            //localStorage removeItem
+            if ("localStorage" in window) {
+                if (localStorage.length > 0) {
+                    localStorage.removeItem(key.value);
+                    location.reload();
+                }
+            } else {
+                alert("no localStorage in window");
+            }
+
+            //sessionStorage removeItem
+            if ("sessionStorage" in window) {
+                if (sessionStorage.length > 0) {
+                    sessionStorage.removeItem(key.value);
+                    location.reload();
+                }
+            } else {
+                alert("no sessionStorage in window");
+            }
+        }
+
+        function clearStorage() {
+            //localStorage clear
+            if ("localStorage" in window) {
+                if (localStorage.length > 0) {
+                    localStorage.clear();
+                    location.reload();
+                }
+            } else {
+                alert("no localStorage in window");
+            }
+
+            //sessionStorage clear
+            if ("sessionStorage" in window) {
+                if (sessionStorage.length > 0) {
+                    sessionStorage.clear();
+                    location.reload();
+                }
+            } else {
+                alert("no sessionStorage in window");
+            }
+        }
+
+        window.onload = function () {
+            var localhtml = "";
+            var sessionhtml = "";
+
+            //localStorage key and getItem
+            for (var i = 0; i < localStorage.length; i++) {
+                localhtml += "<li>" + localStorage.key(i) + " : " + localStorage.getItem(localStorage.key(i)) + "</li>";
+            }
+            document.getElementById('localStorageData').innerHTML = localhtml;
+
+            //sessionStorage key and getItem
+            for (var j = 0; j < sessionStorage.length; j++) {
+                sessionhtml += "<li>" + sessionStorage.key(j) + " : " + sessionStorage.getItem(sessionStorage.key(j)) + "</li>";
+            }
+            document.getElementById('sessionStorageData').innerHTML = sessionhtml;
+        }
+    </script>
+</head>
+<body>
+  <h1>Web storage tutorial</h1>
+    Module :
+	<select name="mydropdown" id="storageKey">
+		<option value="Web Development CT5006">Web Development</option>
+		<option value="Forensic Computing CT5007">Forensic Computing</option>
+		<option value="Project Management CT5003">Project Management</option>
+		<option value="Networking CT5013">Project Management</option>
+	</select>
+	
+		<div class="lecture-input"> Day : <input type="text" id="storageData" style="width: 50px" /> </div>
+		<div class="lecture-input"> Day : <input type="text" id="storageData" style="width: 50px" /> </div>
+		<div class="lecture-input"> Day : <input type="text" id="storageData" style="width: 50px" /> </div>
+
+	Time Start (24H) :
+    <input type="text" id="storageData" style="width: 50px" />
+
+	Time End: (24H) :
+    <input type="text" id="storageData" style="width: 50px" />
+	
+    <input type="button" id="save" value="SAVE" onclick="addStorage(); return false;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    clear Storage :
+    <input type="button" id="clear" value="CLEAR" onclick="clearStorage(); return false;" /><br />
+    <br />
+    localStorage Data :
+    <div id="localStorageData">
+    </div>
+    <br />
+    sessionStorage Data :
+    <div id="sessionStorageData">
+    </div>
+</body>
+</html>

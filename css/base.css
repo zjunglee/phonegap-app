@@ -1,0 +1,21 @@
+#map-container {
+overflow: hidden;
+}
+
+#map {
+width: 90%;
+height: 500px;
+margin: 0 auto;
+}
+
+#map-directions {
+clear:both;
+
+width: 90%;
+margin: 0 auto;
+}
+
+#map-container p {
+text-align:center;	
+color: #000;
+}

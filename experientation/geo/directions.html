@@ -1,0 +1,79 @@
+		<script type="text/javascript">
+				
+			var endlocation = { 'center': '53.7973333,-0.5', 'zoom': 10 };
+			var start;
+			var themap;
+			var destination = "Richmond House,33 Richmond Hill,Bournemouth,Dorset,BH2 6EZ";
+
+			
+			$(document).ready(function() {
+				$('#map').gmap({'center': endlocation.center, 'zoom': endlocation.zoom, 'disableDefaultUI':true, 'callback': function() {
+				themap = this;
+
+				$('#submit').click(function() {
+					themap.displayDirections(
+						{ 'origin': start, 'destination': destination, 'travelMode': google.maps.DirectionsTravelMode.DRIVING, 'unitSystem':google.maps.UnitSystem.METRIC }, 
+						{ 'panel': document.getElementById('directions')}, 
+						function(response, status) {
+							( status === 'OK' ) ? $('#results').show() : $('#results').hide();
+						});
+						return false;
+					});
+				}});
+				navigator.geolocation.getCurrentPosition(handle_geolocation_query);
+			});
+			
+			function handle_geolocation_query(position){  
+				lat = parseInt(position.coords.latitude*10000,10)/10000;
+				lon = parseInt(position.coords.longitude*10000,10)/10000;   
+				start = new google.maps.LatLng(lat, lon);
+				themap.get('map').panTo(start);
+				start = "Bournemouth Airport Bournemouth Airport Ltd (BOH), Hurn, Christchurch BH23 6DF";
+			}			
+							
+        </script>
+    </head>
+    <body>
+		<div id="directionsmap" data-role="page">
+			<div data-role="header">
+				<h1>Get Directions to our office</h1>
+			</div>
+			<div data-role="content">
+				<div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+					<div id="map" style="height:300px;"></div>
+					<a id="submit" href="#" data-role="button" data-icon="search">Get directions</a>
+				</div>
+				<div id="results" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="display:none;">
+					<div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined">Results</div>
+					<div id="directions"></div>
+					<div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-bottom ui-btn-up-undefined"></div>
+				</div>
+			</div>
+			<div data-role="footer" data-theme="a">
+				<div data-role="navbar" id="navbar" data-position="fixed">
+					<ul>
+						<li><a href="#directionsmap">Get directions</a></li>
+						<li><a href="#about">About us</a></li>
+						<li><a href="#info">Information</a></li>
+					</ul>
+				</div><!-- /navbar -->
+
+			</div>			
+		</div>
+		<div id="about" data-role="page">
+			<div data-role="header">
+				<h1>Information about us</h1>
+			</div>
+			<div data-role="content">Holding page content</div>
+		</div>
+		<div id="info" data-role="page">	
+			<div data-role="header">
+				<h1>Info</h1>
+			</div>				
+			<div data-role="content">					
+				Holding page content
+	
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+.lecture-input{
+float:right;
+background:yellow;
+padding: 3px;
+
+}
+
+#storage {
+	width: 220px;
+background: pink;
+}
+
+.stor-icons{
+	width: 220px;
+background: pink;
+clear:both;
+float: ;
+}
